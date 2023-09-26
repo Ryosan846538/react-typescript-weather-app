@@ -1,21 +1,17 @@
-import { useState } from "react";
-
-const Form = () => {
-  const [city, setCity] = useState<string>("");
-  const getWeather = () => {
-    fetch(
-      "https://api.weatherapi.com/v1/current.json?key=c0637c71ae8448ee8f175640232509&q=London&aqi=no"
-    ).then((res) => console.log(res));
-  };
+type FormPropsType = {
+  setCity: React.Dispatch<React.SetStateAction<string>>;
+  getWeather: (e: any) => void;
+};
+const Form = (props: FormPropsType) => {
   return (
     <form>
       <input
         type="text"
         name="city"
         placeholder="都市名"
-        onChange={(e) => setCity(e.target.value)}
+        onChange={(e) => props.setCity(e.target.value)}
       />
-      <button type="submit" onClick={getWeather}>
+      <button type="submit" onClick={props.getWeather}>
         Get Weather
       </button>
     </form>
